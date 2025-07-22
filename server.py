@@ -30,7 +30,7 @@ def validate_date_format(date_str: str) -> str:
 # Generic API caller
 def fetch_data(
     endpoint: str,
-    DisplayName: str,
+    DisplayName: str = "POC",
     Keyword: str = None,
     FromDate: str = None,
     ToDate: str = None,
@@ -60,7 +60,6 @@ def fetch_data(
             url += f"&Keyword={Keyword}&FromDate={FromDate}&ToDate={ToDate}"
         elif FromDate and ToDate:
             url += f"&FromDate={FromDate}&ToDate={ToDate}&Keyword={Keyword}"
-    # For endpoints like GetInfluencerListing with only TokenID and DisplayName, no extra params
 
     try:
         response = requests.get(url)
@@ -71,51 +70,51 @@ def fetch_data(
 
 # Tool: Overall Data
 @mcp.tool()
-def web_search(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(OVERALL_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate)
+def web_search(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(OVERALL_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Timeline Data
 @mcp.tool()
-def GetTimelineData(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(TIMELINE_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate, add_frequency=True)
+def GetTimelineData(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(TIMELINE_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate, add_frequency=True)
 
 # Tool: Top Concepts Data
 @mcp.tool()
-def GetTopConcepts(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(TOP_CONCEPTS_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate, keyword_before_dates=True)
+def GetTopConcepts(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(TOP_CONCEPTS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate, keyword_before_dates=True)
 
 # Tool: Top Companies Data
 @mcp.tool()
-def GetTopCompanies(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(TOP_COMPANIES_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate)
+def GetTopCompanies(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(TOP_COMPANIES_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Top Themes Data
 @mcp.tool()
-def GetTopThemes(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(TOP_THEMES_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate)
+def GetTopThemes(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(TOP_THEMES_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Top Hashtags Data
 @mcp.tool()
-def GetTopHashtags(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(TOP_HASHTAGS_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate)
+def GetTopHashtags(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(TOP_HASHTAGS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Top Contributors Data
 @mcp.tool()
-def GetTopContributors(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(TOP_CONTRIBUTORS_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate)
+def GetTopContributors(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(TOP_CONTRIBUTORS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Social Media Posts Data
 @mcp.tool()
-def GetSocialMediaPosts(DisplayName: str, Keyword: str, FromDate: str, ToDate: str) -> Dict:
-    return fetch_data(SOCIAL_MEDIA_POSTS_API_ENDPOINT, DisplayName, Keyword, FromDate, ToDate)
+def GetSocialMediaPosts(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    return fetch_data(SOCIAL_MEDIA_POSTS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Influencer Listing (only TokenID and DisplayName in URL)
 @mcp.tool()
-def GetInfluencerListing(DisplayName: str) -> Dict:
+def GetInfluencerListing() -> Dict:
     """
-    Fetch influencers for the given DisplayName. Always returns a dictionary inside 'result'.
+    Fetch influencers for the hardcoded DisplayName 'POC'.
     """
-    url = f"{INFLUENCER_LISTING_API_ENDPOINT}?TokenID={API_TOKEN}&DisplayName={DisplayName}"
+    url = f"{INFLUENCER_LISTING_API_ENDPOINT}?TokenID={API_TOKEN}&DisplayName=POC"
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -127,10 +126,9 @@ def GetInfluencerListing(DisplayName: str) -> Dict:
         elif isinstance(data, dict):
             return {"result": data}
         else:
-            return {"result": {}}  # Handles None, str, int, etc.
+            return {"result": {}}
     except requests.RequestException as e:
         return {"result": {"error": str(e)}}
-
 
 # Start server
 if __name__ == "__main__":
