@@ -132,5 +132,5 @@ def GetInfluencerListing() -> Dict:
 
 # Start server
 if __name__ == "__main__":
-    mcp.run(transport="http",port=10000)
+    mcp.run(transport="http")
 
