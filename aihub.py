@@ -20,7 +20,7 @@ def normalize_source_type(source_type: str) -> str:
     """
     Normalizes and formats the source type input.
     """
-    allowed_types = {"news", "deals", "filings", "jobs", "socialmedia", "companies"}
+    allowed_types = {"news", "deals", "filings", "jobs", "socialmedia", "companies","Events", "Reports", "Patents", "Research",  "Financials"}
     source_types = [s.strip().lower() for s in source_type.split(",")]
     filtered = [s.capitalize() for s in source_types if s in allowed_types]
     return ",".join(filtered)
