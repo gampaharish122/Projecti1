@@ -29,7 +29,20 @@ def normalize_source_type(source_type: str) -> str:
 @mcp.tool()
 def GetAIHubApi(question: str, source_type: str) -> Dict:
     """
-    Calls the GlobalData AI Hub API with dynamic source types and user-provided question.
+    Calls the GlobalData AI Hub SourceData API with dynamic SourceType, question, chunk size, and date range.
+Format for date_start and date_end should be DD-MM-YYYY. Use this for getting background information on any factual questions e.g. "What is walmart doing in sustainability"
+Choose most relevant source types for given question
+Source types explained
+SocialMedia - Queries Social Media Data for given Question
+News-  Queries News Database
+Deals - Queries deals database which has transactions like M&A, investments, partnerships, mergers etc
+Filings - Queries company disclosures like Annual Reports, Earnings releases etc.
+Companies - Queries business description of companies
+In case of multiple types use , separator e.g. Deals,News,Filings
+ 
+Args:
+  Question : Query
+ SourceType: possible values are SocialMedia, News, Deals, Filings, Companies
     """
     cleaned_source_type = normalize_source_type(source_type)
     url = f"{API_ENDPOINT_MAIN}?SourceType={requests.utils.quote(cleaned_source_type)}&Question={requests.utils.quote(question)}"
@@ -46,7 +59,41 @@ def GetAIHubApi(question: str, source_type: str) -> Dict:
 def GetAIHubAPISourceData(question: str, source_type: str, chunk_size: int, date_start: str, date_end: str) -> Dict:
     """
     Calls the GlobalData AI Hub SourceData API with dynamic SourceType, question, chunk size, and date range.
-    Format for date_start and date_end should be DD-MM-YYYY.
+
+Format for date_start and date_end should be DD-MM-YYYY. Use this for getting background information on any factual questions e.g. "What is walmart doing in sustainability"
+ 
+Calls the GlobalData AI Hub SourceData API with dynamic SourceType, question, chunk size, and date range.
+
+Format for date_start and date_end should be DD-MM-YYYY. Use this for getting background information on any factual questions e.g. "What is walmart doing in sustainability"
+
+Choose most relevant source types for given question
+
+Source types explained
+
+SocialMedia - Queries Social Media Data for given Question
+
+News-  Queries News Database
+
+Deals - Queries deals database which has transactions like M&A, investments, partnerships, mergers etc
+
+Filings - Queries company disclosures like Annual Reports, Earnings releases etc.
+
+Companies - Queries business description of companies
+
+In case of multiple types use , separator e.g. Deals,News,Filings
+ 
+Args:
+
+  Question : Query
+
+  ChunkSize: Number of chunks of background information to load (typically use 30)
+
+  FromDate : Date in format DD-MM-YYYY
+
+  ToDate : Date in the format DD-MM-YYY
+
+  SourceType: possible values are SocialMedia, News, Deals, Filings, Companies
+ 
     """
     cleaned_source_type = normalize_source_type(source_type)
     params = {
