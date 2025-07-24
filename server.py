@@ -71,48 +71,104 @@ def fetch_data(
 # Tool: Overall Data
 @mcp.tool()
 def web_search(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media Overall Data   for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(OVERALL_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Timeline Data
 @mcp.tool()
 def GetTimelineData(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media TimelineData for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(TIMELINE_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate, add_frequency=True)
 
 # Tool: Top Concepts Data
 @mcp.tool()
 def GetTopConcepts(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media Top Concepts Data for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(TOP_CONCEPTS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate, keyword_before_dates=True)
 
 # Tool: Top Companies Data
 @mcp.tool()
 def GetTopCompanies(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media Top Companies data  for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(TOP_COMPANIES_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Top Themes Data
 @mcp.tool()
 def GetTopThemes(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media Top Themes for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(TOP_THEMES_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Top Hashtags Data
 @mcp.tool()
 def GetTopHashtags(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media Top Hashtags  for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(TOP_HASHTAGS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Top Contributors Data
 @mcp.tool()
 def GetTopContributors(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media Top Contributors for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(TOP_CONTRIBUTORS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Social Media Posts Data
 @mcp.tool()
 def GetSocialMediaPosts(Keyword: str, FromDate: str, ToDate: str) -> Dict:
+    """Get Social Media Posts for any keyword from influencers. You can use boolean parameters
+    Influencer search is very basic so always use plurals and singular of all relevant query components to cover exhaustive results. Also make sure quote marks are used for phrases e.g. "Apple intelligence"
+      Args:
+        Keyword : Query
+        FromDate : Date in format DD-MM-YYYY
+        ToDate : Date in the format DD-MM-YYY
+    """
     return fetch_data(SOCIAL_MEDIA_POSTS_API_ENDPOINT, Keyword=Keyword, FromDate=FromDate, ToDate=ToDate)
 
 # Tool: Influencer Listing (only TokenID and DisplayName in URL)
 @mcp.tool()
 def GetInfluencerListing() -> Dict:
     """
-    Fetch influencers for the hardcoded DisplayName 'POC'.
+    Fetch influencers for the  DisplayName 'POC'.
     """
     url = f"{INFLUENCER_LISTING_API_ENDPOINT}?TokenID={API_TOKEN}&DisplayName=POC"
     try:
